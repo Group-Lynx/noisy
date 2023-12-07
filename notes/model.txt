@@ -1,0 +1,26 @@
+User {
+    uuid: Uuid,
+    name: String,
+    ...
+}
+
+Chatroom {
+    uuid: Uuid,
+    name: String,
+    ...
+}
+
+Message {
+    sender: Uuid,
+    chatroom: Uuid,
+    date: DateTime,
+    content: String,
+    ...
+}
+
+/* == 增强性功能(基础功能完成差不多后再考虑) == */
+
+Notification {
+    uuid: Uuid,
+    ...
+}

@@ -1,0 +1,33 @@
+/* 用户认证 */
+GET     /auth                                       // 获取当前认证状态
+POST    /auth/login             application/json    // 用户登录
+POST    /auth/signup            application/json    // 用户注册
+
+/* 用户管理 */
+GET     /user/[user_id]                             // 检索用户信息
+PUT     /user/[user_id]         application/json    // 更新用户信息
+DELETE  /user/[user_id]                             // 删除用户
+
+/* 聊天室管理 */
+GET     /chat                                       // 检索用户加入的所有聊天室
+GET     /chat/[chat_id]                             // 检索聊天室信息
+PUT     /chat/[chat_id]         application/json    // 更新聊天室信息
+POST    /chat/[chat_id]/join    application/json    // 用户加入聊天室
+POST    /chat/[chat_id]/leave   application/json    // 用户离开聊天室
+GET     /chat/[chat_id]/msg                         // 检索聊天室的所有消息
+
+/* 搜索处理 */
+GET     /search/user                                // （此端点不应返回用户）
+        ?name=[pattern]                             // 搜索所有用户名匹配 [pattern] 的用户
+GET     /search/chat                                // （此端点应返回所有聊天室）
+        ?name=[pattern]                             // 搜索所有聊天室名匹配 [pattern] 的聊天室
+
+/* WebSocket 端点 */
+SOCKET  /socket?chat=[chat_id]                      // 聊天室 [chat_id] 的 WebSocket 端点
+                                                    // 实现：客户端将订阅 '/chat/[chat_id]'
+
+/* == 增强性功能(基础功能完成差不多后再考虑) == */
+
+/* 通知管理 */
+GET     /inbox/[user_id]                            // 检索用户的所有通知
+PATCH   /inbox/[user_id]        application/json    // 更新用户的通知
