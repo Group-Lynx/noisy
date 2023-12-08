@@ -12,6 +12,7 @@ DELETE  /user/[user_id]                             // 删除用户
 GET     /chat                                       // 检索用户加入的所有聊天室
 GET     /chat/[chat_id]                             // 检索聊天室信息
 PUT     /chat/[chat_id]         application/json    // 更新聊天室信息
+DELETE  /chat/[chat_id]                             // 删除聊天室
 POST    /chat/[chat_id]/join    application/json    // 用户加入聊天室
 POST    /chat/[chat_id]/leave   application/json    // 用户离开聊天室
 GET     /chat/[chat_id]/msg                         // 检索聊天室的所有消息
