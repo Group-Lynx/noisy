@@ -2,7 +2,7 @@ show databases;
 use test;
 create table User(
     uuid binary(16) primary key, #insert时需要UUID_TO_BIN(UUID(),false),取出时相反
-    name nvarchar(20) not null,
+    name nvarchar(20) not null unique,
     password varchar(20) not null,
     gender binary(1), #0女1男
     age int(2),
@@ -14,7 +14,7 @@ create table User(
 create table Chatroom(
     uuid binary(16) primary key,#insert时需要UUID_TO_BIN(UUID())
     owner_uuid binary(16),
-    name nvarchar(15) not null,
+    name nvarchar(15) not null unique,
     userNum tinyint default 1,
     avatar blob, #头像；insert时需LOAD_FILE('/path/to/image/avatar.jpg')
     foreign key (owner_uuid) references User(uuid)
