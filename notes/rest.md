@@ -19,12 +19,11 @@
 
 **Response**
 
-设置 Cookie `user_token: session_token` 和 `user_uuid: user_uuid`。
+设置 Cookie `user_token: session_token` 和 `user_name: user_name`。
 
 ```
 // 200 Ok
 {
-    "uuid": string,
     "name": string,
 }
 // 401 Unauthorized
@@ -49,12 +48,9 @@
 
 **Response**
 
-设置 Cookie `user_token: session_token` 和 `user_uuid: user_uuid`。
-
 ```
 // 201 Created
 {
-    "uuid": string,
     "name": string,
 }
 // 4XX Client Error
@@ -66,9 +62,9 @@
 
 ## 用户管理
 
-### `GET /user/[user_uuid]`
+### `GET /user/[user_name]`
 
-依照用户 UUID 获取用户信息，成功返回 200，失败返回 4XX（依据情况返回不同错误码）。
+依照用户 `user_name` 获取用户信息，成功返回 200，失败返回 4XX（依据情况返回不同错误码）。
 
 **Request**
 
@@ -77,7 +73,6 @@
 ```
 // 200 Ok
 {
-    "uuid": string,
     "name": string,
 }
 // 4XX Client Error
@@ -87,9 +82,9 @@
 }
 ```
 
-### `PATCH /user/[user_uuid]`
+### `PATCH /user/[user_name]`
 
-该请求应当检查 Cookie。更改 UUID 对应的用户的信息，更改成功返回 200，更新失败返回 4XX。
+该请求应当检查 Cookie。更改 `user_name` 对应的用户的信息，更改成功返回 200，更新失败返回 4XX。
 
 **Request**
 
@@ -106,7 +101,6 @@
 ```
 // 200 Ok
 {
-    "uuid": string,
     "name": string,
 }
 // 4XX Client Error
@@ -116,9 +110,9 @@
 }
 ```
 
-### `DELETE /user/[user_uuid]`
+### `DELETE /user/[user_name]`
 
-该请求应当检查 Cookie。删除 UUID 对应的用户，删除成功返回 204，失败返回 4XX 。
+该请求应当检查 Cookie。删除 `user_name` 对应的用户，删除成功返回 204，失败返回 4XX 。
 
 **Request**
 
@@ -151,12 +145,11 @@
 ```
 // 200 Ok
 {
-	"chatrooms": [  // 方括号表示数组
+    "chatrooms": [  // 方括号表示数组
         "chat_detail": {
-        	"chat": {
-                "uuid": string,
+            "chat": {
                 "name": string,
-        	},
+            },
             "unread": number,
         },
         ...
@@ -169,9 +162,9 @@
 }
 ```
 
-### `GET /chat/[chat_uuid]`
+### `GET /chat/[chat_name]`
 
-检索 UUID 所对应的聊天室的信息，成功返回 200，失败返回 4XX。
+检索 `chat_name` 所对应的聊天室的信息，成功返回 200，失败返回 4XX。
 
 **Request**
 
@@ -183,11 +176,10 @@
     "name": string,
     "owner_name": string,
     "members": [
-    	"user": {
-    		"uuid": string,
-    		"name": string,
-    	},
-    	...
+        "user": {
+            "name": string,
+        },
+        ...
     ],
 }
 // 4XX Client Error
@@ -197,15 +189,15 @@
 }
 ```
 
-### `PATCH /chat/[chat_id]`
+### `PATCH /chat/[chat_name]`
 
-该请求应当检查 Cookie。聊天室所有者更新 UUID 所对应的聊天室的信息，成功返回 200，失败返回 4XX。
+该请求应当检查 Cookie。聊天室所有者更新 `chat_name` 所对应的聊天室的信息，成功返回 200，失败返回 4XX。
 
 **Request**
 
 ```
 {
-	"new_name": string | null,
+    "new_name": string | null,
 }
 ```
 
@@ -214,8 +206,7 @@
 ```
 // 200 Ok
 {
-    "uuid": string,
-	"name": string,
+    "name": string,
 }
 // 4XX Client Error
 {
@@ -224,9 +215,9 @@
 }
 ```
 
-### `DELETE /chat/[chat_id]`
+### `DELETE /chat/[chat_name]`
 
-该请求应当检查 Cookie。聊天室所有者删除 UUID 所对应的聊天室，成功返回 204，失败返回 4XX。
+该请求应当检查 Cookie。聊天室所有者删除 `chat_name` 所对应的聊天室，成功返回 204，失败返回 4XX。
 
 **Request**
 
@@ -240,25 +231,9 @@
 }
 ```
 
-### `POST /chat/[chat_id]/join`
+### `POST /chat/[chat_name]/join`
 
-该请求应当检查 Cookie。将发送请求的用户加入 UUID 所对应的聊天室，成功返回 204，失败返回 4XX。
-
-**Request**
-
-**Response**
-
-```
-// 4XX Client Error
-{
-    "err": string,
-    "msg": string,
-}
-```
-
-### `POST /chat/[chat_id]/leave`
-
-该请求应当检查 Cookie。让发送请求的用户离开 UUID 所对应的聊天室，成功返回 204，失败返回 4XX。
+该请求应当检查 Cookie。将发送请求的用户加入 `chat_name` 所对应的聊天室，成功返回 204，失败返回 4XX。
 
 **Request**
 
@@ -272,7 +247,23 @@
 }
 ```
 
-### `GET /chat/[chat_id]/msg`
+### `POST /chat/[chat_name]/leave`
+
+该请求应当检查 Cookie。让发送请求的用户离开 `chat_name` 所对应的聊天室，成功返回 204，失败返回 4XX。
+
+**Request**
+
+**Response**
+
+```
+// 4XX Client Error
+{
+    "err": string,
+    "msg": string,
+}
+```
+
+### `GET /chat/[chat_name]/msg`
 
 该请求应当检查 Cookie。检索聊天室的所有消息，成功返回 200，失败返回 4XX。
 
@@ -321,9 +312,8 @@
 ```
 // 200 Ok
 {
-	"users": [
+    "users": [
         "user": {
-            "uuid": string,
             "name": string,
         },
         ...
@@ -346,9 +336,8 @@
 ```
 // 200 Ok
 {
-	"chatrooms": [
+    "chatrooms": [
         "chat": {
-            "uuid": string,
             "name": string,
         },
         ...
