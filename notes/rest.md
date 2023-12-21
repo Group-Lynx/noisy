@@ -146,7 +146,7 @@
 // 200 Ok
 {
     "chatrooms": [  // 方括号表示数组
-        "chat_detail": {
+        {
             "chat": {
                 "name": string,
             },
@@ -176,7 +176,7 @@
     "name": string,
     "owner_name": string,
     "members": [
-        "user": {
+        {
             "name": string,
         },
         ...
@@ -275,7 +275,7 @@
 // 200 Ok
 {
     "messages": [
-        "message": {
+        {
             "sender": string,   // 发送者的用户名
             "content": string,  // 消息的内容
             "sent_date": {      // 发送消息的时间
@@ -313,7 +313,7 @@
 // 200 Ok
 {
     "users": [
-        "user": {
+        {
             "name": string,
         },
         ...
@@ -337,7 +337,7 @@
 // 200 Ok
 {
     "chatrooms": [
-        "chat": {
+        {
             "name": string,
         },
         ...
