@@ -4,6 +4,26 @@
 
 ## 用户认证
 
+### `GET /auth`
+
+得到用户目前身份。
+
+**Request**
+
+**Response**
+
+```
+// 200 Ok
+{
+    "name": string,
+}
+// 401 Unauthorized
+{
+    "err": string,
+    "msg": string,
+}
+```
+
 ### `POST /auth/login`
 
 执行用户登录操作，登录成功返回 200，登录失败（不存在用户或密码错误）返回 401。
