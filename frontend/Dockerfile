@@ -4,6 +4,9 @@ WORKDIR /app
 
 COPY . .
 
+# Fix npm connect error
+RUN npm config set registry https://registry.npmmirror.com/
+
 # Set env for compose
 ENV API_SERVER_HOST=noisy-backend
 
