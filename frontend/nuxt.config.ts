@@ -33,15 +33,15 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      restApiUrl: "http://localhost:8080",
-      socketEndpoint: "ws://localhost:8080/socket",
+      apiServerHost: process.env.API_SERVER_HOST || 'localhost',
+      socketEndpoint: `ws://${'localhost'}:8080/socket`,
     },
   },
   apiParty: {
     client: "allow",
     endpoints: {
       apiServer: {
-        url: "http://localhost:8080",
+        url: `http://${process.env.API_SERVER_HOST || 'localhost'}:8080`,
         cookies: true,
       },
     },

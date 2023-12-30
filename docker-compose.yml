@@ -1,0 +1,62 @@
+version: '3'
+
+services:
+  noisy-frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    networks:
+      - noisy-network
+    depends_on:
+      noisy-backend:
+        condition: service_healthy
+
+  noisy-backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    networks:
+      - noisy-network
+    ports:
+      - "8080:8080"
+    environment:
+      - MYSQL_HOST=noisy-database
+    depends_on:
+      noisy-database:
+        condition: service_healthy
+    healthcheck:
+      test: [ "CMD", "curl", "http://localhost:8080/health" ]
+      interval: 5s
+      timeout: 5s
+      retries: 60
+      start_period: 5s
+
+  noisy-database:
+    image: mysql:8.2.0
+    environment:
+      - MYSQL_ROOT_PASSWORD=
+      - MYSQL_ALLOW_EMPTY_PASSWORD=true
+      - MYSQL_USER=springuser
+      - MYSQL_PASSWORD=SpringUserPassword
+      - MYSQL_DATABASE=noisy_db
+    networks:
+      - noisy-network
+    volumes:
+      - noisy-data:/var/lib/mysql
+      - noisy-data-config:/etc/mysql/conf.d
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping" ]
+      interval: 5s
+      timeout: 5s
+      retries: 60
+      start_period: 5s
+
+volumes:
+  noisy-data:
+  noisy-data-config:
+
+
+networks:
+  noisy-network:
