@@ -30,11 +30,7 @@
       <LynChatsList />
     </div>
     <div class="flex flex-grow">
-      <Discover
-        v-if="tabPosition === 'DISCOVER'"
-        @join-chat="(name) => joinChat(name)"
-      />
-      <slot v-else />
+      <slot />
     </div>
   </div>
 </template>
@@ -74,14 +70,6 @@ const chatrooms = useState<
     unread: number;
   }[]
 >("chatrooms", () => data.value.chatrooms);
-function joinChat(name: string) {
-  chatrooms.value.push({
-    chat: {
-      name: name,
-    },
-    unread: 0,
-  });
-}
 </script>
 
 <style></style>

@@ -77,10 +77,6 @@
 </template>
 
 <script lang="ts" setup>
-const emit = defineEmits<{
-  joinChat: [name: string];
-}>();
-
 // Messages
 const msgToDisplay = ref<
   {
@@ -152,7 +148,12 @@ async function joinChat(name: string) {
       msg: "加入成功",
       lvl: "success",
     });
-    emit("joinChat", name);
+    chatrooms.value.push({
+      chat: {
+        name: name,
+      },
+      unread: 0,
+    });
   }
 }
 
@@ -177,7 +178,12 @@ async function createChat() {
       msg: "创建成功",
       lvl: "success",
     });
-    emit("joinChat", chatToCreate.value);
+    chatrooms.value.push({
+      chat: {
+        name: chatToCreate.value,
+      },
+      unread: 0,
+    });
     dialogVisible.value = false;
   }
 }
