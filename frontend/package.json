@@ -13,10 +13,18 @@
     "@nuxt/devtools": "latest",
     "@nuxtjs/tailwindcss": "^6.10.1",
     "nuxt": "^3.8.2",
-    "vue": "^3.3.8",
+    "nuxt-api-party": "^0.22.3",
+    "nuxt-primevue": "^0.2.2",
+    "prettier": "^3.1.1",
+    "prettier-plugin-tailwindcss": "^0.5.9",
+    "vue": "^3.3.12",
     "vue-router": "^4.2.5"
   },
   "dependencies": {
-    "@vueuse/nuxt": "^10.6.1"
+    "@formkit/auto-animate": "^0.8.1",
+    "@stomp/stompjs": "^7.0.0",
+    "@vueuse/nuxt": "^10.7.0",
+    "primeicons": "^6.0.1",
+    "primevue": "^3.44.0"
   }
 }

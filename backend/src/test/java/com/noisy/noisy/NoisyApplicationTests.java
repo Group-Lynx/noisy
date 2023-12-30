@@ -1,13 +1,13 @@
-package org.lynx.noisy;
+package com.noisy.noisy;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class NoisyBackendApplicationTests {
+class NoisyApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
+    @Test
+    void contextLoads() {
+    }
 
 }
